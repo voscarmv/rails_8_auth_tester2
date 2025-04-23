@@ -35,7 +35,7 @@ const readLineAsync = () => {
       console.error(e)
     }
     console.log(output);
-    console.log('Password reset token?');
+    console.log('Password reset token? (check your email and span inbox)');
     const token = await readLineAsync();
     const pass = process.env.NEWPASS;
     let output2;

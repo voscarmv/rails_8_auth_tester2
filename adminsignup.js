@@ -3,20 +3,6 @@ import readline from 'readline';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const readLineAsync = () => {
-  const rl = readline.createInterface({
-    input: process.stdin
-  });
-
-  return new Promise((resolve) => {
-    rl.prompt();
-    rl.on('line', (line) => {
-      rl.close();
-      resolve(line);
-    });
-  });
-};
-
 (
   async () => {
     const url = `${process.env.APIURL}/session`;
