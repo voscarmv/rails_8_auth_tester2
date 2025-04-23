@@ -1,5 +1,4 @@
 import fetch from 'node-fetch';
-import readline from 'readline';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -15,7 +14,7 @@ dotenv.config();
         headers: {
           'Content-Type': 'application/json', // Set the content type
         },
-        body: JSON.stringify({ email_address: usr, password: pass }) // Send the body as JSON
+        body: JSON.stringify({ user: { email_address: usr, password: pass }}) // Send the body as JSON
       });
       output = await response.json();
     } catch (e) {
@@ -33,7 +32,7 @@ dotenv.config();
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${output.data.token}`,
         },
-        body: JSON.stringify({ title: "New proj", description: `Bearer ${output.data.token}` }) // Send the body as JSON
+        body: JSON.stringify({ project: { title: "New proj", description: `Bearer ${output.data.token}` }}) // Send the body as JSON
       });
       output2 = await response.json();
       headers2 = response.headers;

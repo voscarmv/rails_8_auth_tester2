@@ -1,5 +1,4 @@
 import fetch from 'node-fetch';
-import readline from 'readline';
 import dotenv from 'dotenv';
 dotenv.config();
 
