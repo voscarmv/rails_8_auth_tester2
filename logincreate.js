@@ -20,8 +20,8 @@ const readLineAsync = () => {
 (
   async () => {
     const url = `${process.env.APIURL}/session`;
-    const usr = process.env.ADMIN;
-    const pass = process.env.ADMINPASS;
+    const usr = process.env.USER1;
+    const pass = process.env.USERPASS1;
     let output = null;
     try {
       const response = await fetch(url, {
@@ -71,23 +71,30 @@ const readLineAsync = () => {
     }
     console.log(output2);
     console.log(headers2.get('authorization'));
-    try {
-      const response = await fetch(url2, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${headers2.get('authorization')}`,
-        },
-      });
-      output2 = await response.json();
-      headers2 = response.headers;
-    } catch (e) {
-      console.error(e)
-    }
-    console.log(output2);
-    console.log(headers2.get('authorization'));
+
+
+
     try {
       const response = await fetch(`${url2}/${output2.data.projects[0].id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${headers2.get('authorization')}`,
+        },
+        body: JSON.stringify({ project: { title: "New proj", description: `Bubibubibu` }}) // Send the body as JSON
+      });
+      output2 = await response.json();
+      headers2 = response.headers;
+    } catch (e) {
+      console.error(e)
+    }
+
+
+
+    console.log(output2);
+    console.log(headers2.get('authorization'));
+    try {
+      const response = await fetch(`${url2}/${output2.data.project.id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -110,21 +117,6 @@ const readLineAsync = () => {
         },
       });
       output2 = await response.json();
-      headers2 = response.headers;
-    } catch (e) {
-      console.error(e)
-    }
-    console.log(output2);
-    console.log(headers2.get('authorization'));
-    try {
-      const response = await fetch(url, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${headers2.get('authorization')}`,
-        },
-      });
-      // output2 = await response.json();
       headers2 = response.headers;
     } catch (e) {
       console.error(e)
